@@ -35,10 +35,6 @@ No configuration needed.
 There are `after-plugins` that add the tokens to the individual sections.
  
 If a token already exists, it uses the existing one. Otherwise, a fresh token is generated on the fly.
- 
-## Security
- 
-If you discover any security related issues, please email ww@integer-net.de instead of using the issue tracker.
 
 ## Credits
 
