@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Wigman Interactive. All rights reserved.
+ * This product is licensed per Magento production install
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="customerdata.cart" type="Hyva\GraphqlTokens\CustomerData\CartPlugin" />
+    </type>
+    <type name="Magento\Customer\CustomerData\Customer">
+        <plugin name="customerdata.customer" type="Hyva\GraphqlTokens\CustomerData\CustomerPlugin" />
+    </type>
+</config>

@@ -8,10 +8,11 @@
     "magento/module-checkout": "100.4.*",
     "magento/module-customer": "103.0.*"
   },
-  "authors": [
-      "Hyvä Themes, Wigman Interactive"
-  ],
-  "license": "see LICENSE.txt",
+  "authors": [{
+      "name": "Hyvä Themes, Wigman Interactive",
+      "email": "info@hyva.io"
+  }],
+  "license": "see LICENSE.md",
   "autoload": {
     "files": [
       "src/registration.php"
