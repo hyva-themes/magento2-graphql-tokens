@@ -1,4 +1,7 @@
 # Hyva Themes - GraphQL Tokens module
+
+[![Hyvä Themes](https://repository-images.githubusercontent.com/300568807/4d10e980-06ea-11eb-9cb0-aa305e60dbeb)](https://hyva.io/)
+
 ## hyva-themes/magento2-graphql-tokens
 
 ![Supported Magento Versions][ico-compatibility]
