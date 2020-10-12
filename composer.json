@@ -4,9 +4,9 @@
   "type": "magento2-module",
   "require": {
     "magento/framework": "*",
-    "magento/module-catalog": "104.0.*",
-    "magento/module-checkout": "100.4.*",
-    "magento/module-customer": "103.0.*"
+    "magento/module-catalog": ">=103.0.0",
+    "magento/module-checkout": ">=100.3.0",
+    "magento/module-customer": ">=102.0.0"
   },
   "authors": [{
       "name": "Hyvä Themes, Wigman Interactive",
