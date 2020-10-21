@@ -1,8 +1,8 @@
 <?php
 /**
  * Hyvä Themes - https://hyva.io
- * Copyright © Wigman Interactive. All rights reserved.
- * This product is licensed per Magento production install
+ * Copyright © Hyvä Themes. All rights reserved.
+ * See LICENSE.md for license details
  */
 
 declare(strict_types=1);
