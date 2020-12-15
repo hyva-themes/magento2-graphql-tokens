@@ -14,8 +14,8 @@ use Magento\Customer\Helper\Session\CurrentCustomer;
 use Magento\Integration\Model\Oauth\Token as TokenModel;
 use Magento\Integration\Model\Oauth\TokenFactory as TokenModelFactory;
 
-class CustomerPlugin {
-
+class CustomerPlugin
+{
     /**
      * @var CurrentCustomer
      */
@@ -29,8 +29,7 @@ class CustomerPlugin {
     public function __construct(
         CurrentCustomer $currentCustomer,
         TokenModelFactory $tokenModelFactory
-    )
-    {
+    ) {
         $this->currentCustomer = $currentCustomer;
         $this->tokenModelFactory = $tokenModelFactory;
     }

@@ -16,8 +16,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 
-class CartPlugin {
-
+class CartPlugin
+{
     /**
      * @var Quote|null
      */
