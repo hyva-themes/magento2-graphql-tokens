@@ -1,6 +1,6 @@
-# Hyva Themes - GraphQL Tokens module
+# Hyvä Themes - GraphQL Tokens module
 
-[![Hyvä Themes](https://repository-images.githubusercontent.com/300568807/4d10e980-06ea-11eb-9cb0-aa305e60dbeb)](https://hyva.io/)
+[![Hyvä Themes](https://repository-images.githubusercontent.com/300568807/f00eb480-55b1-11eb-93d2-074c3edd2d07)](https://hyva.io/)
 
 ## hyva-themes/magento2-graphql-tokens
 
@@ -14,8 +14,9 @@ Compatible with Magento 2.3.4 and higher.
 It adds:
  - `signin_token` to the `customer` section
  - `cartId` to the `cart` section
+ - `storeViewCode` to the `cart` section
  
-The CartId is the masked `cartId` that is needed for guest carts.
+The CartId is the masked `cartId` that is needed for guest carts. The `storeViewCode` is needed to set the store-code on GraphqQl requests.
  
 When logged in, the customer `signin_token` can be used to get the *real cart id*.
  
