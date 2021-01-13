@@ -36,7 +36,7 @@ class CartPlugin
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
      * @var QuoteIdToMaskedQuoteIdInterface
