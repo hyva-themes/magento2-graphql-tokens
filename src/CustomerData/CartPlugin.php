@@ -34,6 +34,11 @@ class CartPlugin
     private $checkoutCart;
 
     /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
      * @var QuoteIdToMaskedQuoteIdInterface
      */
     private $quoteIdToMaskedQuoteId;
@@ -45,11 +50,13 @@ class CartPlugin
     public function __construct(
         Session $checkoutSession,
         CurrentCustomer $currentCustomer,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Checkout\Model\Cart $checkoutCart,
         QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->checkoutCart = $checkoutCart;
+        $this->storeManager = $storeManager;
         $this->quoteIdToMaskedQuoteId = $quoteIdToMaskedQuoteId;
         $this->currentCustomer = $currentCustomer;
     }
@@ -63,11 +70,15 @@ class CartPlugin
      */
     public function afterGetSectionData(Cart $subject, array $result)
     {
+        $storeViewCode = (string) $this->storeManager->getStore()->getCode();
         $cartId = (int) $this->getQuote()->getId();
+
         if ($cartId) {
             $cartId = $this->getQuoteMaskId($cartId) ?: $cartId;
         }
+
         $result['cartId'] = $cartId;
+        $result['storeViewCode'] = $storeViewCode;
 
         return $result;
     }
