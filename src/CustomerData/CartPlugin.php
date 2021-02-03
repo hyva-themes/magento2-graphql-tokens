@@ -14,6 +14,8 @@ use Magento\Checkout\Model\Session;
 use Magento\Customer\Helper\Session\CurrentCustomer;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\QuoteIdMask;
+use Magento\Quote\Model\QuoteIdMaskFactory;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 
 class CartPlugin
@@ -46,19 +48,25 @@ class CartPlugin
      * @var CurrentCustomer
      */
     private $currentCustomer;
+    /**
+     * @var quoteIdMaskFactory
+     */
+    private $quoteIdMaskFactory;
 
     public function __construct(
         Session $checkoutSession,
         CurrentCustomer $currentCustomer,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Checkout\Model\Cart $checkoutCart,
-        QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId
+        QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId,
+        quoteIdMaskFactory $quoteIdMaskFactory
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->checkoutCart = $checkoutCart;
         $this->storeManager = $storeManager;
         $this->quoteIdToMaskedQuoteId = $quoteIdToMaskedQuoteId;
         $this->currentCustomer = $currentCustomer;
+        $this->quoteIdMaskFactory = $quoteIdMaskFactory;
     }
 
     /**
@@ -72,12 +80,21 @@ class CartPlugin
     {
         $storeViewCode = (string) $this->storeManager->getStore()->getCode();
         $cartId = (int) $this->getQuote()->getId();
+        $maskedCartId = '';
 
         if ($cartId) {
-            $cartId = $this->getQuoteMaskId($cartId) ?: $cartId;
+            $maskedCartId = $this->getQuoteMaskId($cartId);
+
+            if (!$maskedCartId) {
+                /** @var QuoteIdMask $quoteIdMask */
+                $quoteIdMask = $this->quoteIdMaskFactory->create();
+                $quoteIdMask->setQuoteId($cartId)
+                    ->save();
+                $maskedCartId = $quoteIdMask->getMaskedId() ?: '';
+            }
         }
 
-        $result['cartId'] = $cartId;
+        $result['cartId'] = $maskedCartId;
         $result['storeViewCode'] = $storeViewCode;
 
         return $result;
