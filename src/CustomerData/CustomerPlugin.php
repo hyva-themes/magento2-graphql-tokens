@@ -31,18 +31,21 @@ class CustomerPlugin
      * @var TokenModelFactory
      */
     private $tokenModelFactory;
+    
     /**
      * @var OauthHelper
      */
-    private OauthHelper $oauthHelper;
+    private $oauthHelper;
+    
     /**
      * @var DateTime
      */
-    private DateTime $dateTime;
+    private $dateTime;
+    
     /**
      * @var Date
      */
-    private Date $date;
+    private $date;
 
     public function __construct(
         CurrentCustomer $currentCustomer,
