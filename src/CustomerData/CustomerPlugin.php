@@ -108,11 +108,11 @@ class CustomerPlugin
         $token = $tokenModel->loadByCustomerId($customerId);
 
         if (!$token->getId() || $token->getRevoked() || $this->isTokenExpired($token)) {
-            $token = $tokenModel->createCustomerToken($customerId)->getToken();
+            $token = $tokenModel->createCustomerToken($customerId);
         }
 
-        if ($token) {
-            $result['signin_token'] = $token;
+        if ($tokenValue = $token->getToken()) {
+            $result['signin_token'] = $tokenValue;
         }
 
         return $result;
