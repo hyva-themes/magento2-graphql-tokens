@@ -31,17 +31,17 @@ class CustomerPlugin
      * @var TokenModelFactory
      */
     private $tokenModelFactory;
-    
+
     /**
      * @var OauthHelper
      */
     private $oauthHelper;
-    
+
     /**
      * @var DateTime
      */
     private $dateTime;
-    
+
     /**
      * @var Date
      */
@@ -108,6 +108,13 @@ class CustomerPlugin
         $token = $tokenModel->loadByCustomerId($customerId);
 
         if (!$token->getId() || $token->getRevoked() || $this->isTokenExpired($token)) {
+            // if there exist an entry in oauth_token table for the customer, then
+            // remove it before attempting createCustomerToken
+            if ($token->getId()) {
+                $token->delete();
+                $tokenModel = $this->tokenModelFactory->create();
+            }
+
             $token = $tokenModel->createCustomerToken($customerId);
         }
 
