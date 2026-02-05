@@ -15,13 +15,13 @@ It adds:
  - `signin_token` to the `customer` section
  - `cartId` to the `cart` section
  - `storeViewCode` to the `cart` section
- 
+
 The CartId is the masked `cartId` that is needed for guest carts. The `storeViewCode` is needed to set the store-code on GraphqQl requests.
- 
+
 When logged in, the customer `signin_token` can be used to get the *real cart id*.
- 
+
 ## Installation
-  
+
 1. Install via composer
     ```
     composer config repositories.hyva-themes/magento2-graphql-tokens git git@github.com:hyva-themes/magento2-graphql-tokens.git
@@ -32,12 +32,12 @@ When logged in, the customer `signin_token` can be used to get the *real cart id
     bin/magento setup:upgrade
     ```
 ## Configuration
-  
+
 No configuration needed.
-  
+
 ## How does it work?
 There are `after-plugins` that add the tokens to the individual sections.
- 
+
 If a token already exists, it uses the existing one. Otherwise, a fresh token is generated on the fly.
 
 ## Credits
@@ -45,9 +45,12 @@ If a token already exists, it uses the existing one. Otherwise, a fresh token is
 - [Willem Wigman][link-author]
 - [All Contributors][link-contributors]
 
-## License
+### License
 
-The MIT License (MIT). Please see [License File](LICENSE.txt) for more information.
+This package is licensed under the **Open Software License (OSL 3.0)**.
+
+* **Copyright:** Copyright © 2020-present Hyvä Themes. All rights reserved.
+* **License Text (OSL 3.0):** The full text of the OSL 3.0 license can be found in the `LICENSE.txt` file within this package, and is also available online at [http://opensource.org/licenses/osl-3.0.php](http://opensource.org/licenses/osl-3.0.php).
 
 [ico-compatibility]: https://img.shields.io/badge/magento-%202.3%20|%202.4-brightgreen.svg?logo=magento&longCache=true&style=flat-square
 
