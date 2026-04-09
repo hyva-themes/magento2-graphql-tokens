@@ -53,8 +53,7 @@ class CustomerPlugin
         DateTime $dateTime,
         Date $date,
         OauthHelper $oauthHelper
-    )
-    {
+    ) {
         $this->currentCustomer = $currentCustomer;
         $this->tokenModelFactory = $tokenModelFactory;
         $this->oauthHelper = $oauthHelper;
