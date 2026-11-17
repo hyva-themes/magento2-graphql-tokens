@@ -17,6 +17,7 @@ use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdMask;
 use Magento\Quote\Model\QuoteIdMaskFactory;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
+use Magento\Quote\Model\ResourceModel\Quote\QuoteIdMask as QuoteIdMaskResource;
 
 class CartPlugin
 {
@@ -49,9 +50,14 @@ class CartPlugin
      */
     private $currentCustomer;
     /**
-     * @var quoteIdMaskFactory
+     * @var QuoteIdMaskFactory
      */
     private $quoteIdMaskFactory;
+
+    /**
+     * @var QuoteIdMaskResource
+     */
+    private $quoteIdMaskResource;
 
     public function __construct(
         Session $checkoutSession,
@@ -59,7 +65,8 @@ class CartPlugin
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Checkout\Model\Cart $checkoutCart,
         QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId,
-        quoteIdMaskFactory $quoteIdMaskFactory
+        QuoteIdMaskFactory $quoteIdMaskFactory,
+        QuoteIdMaskResource $quoteIdMaskResource
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->checkoutCart = $checkoutCart;
@@ -67,6 +74,7 @@ class CartPlugin
         $this->quoteIdToMaskedQuoteId = $quoteIdToMaskedQuoteId;
         $this->currentCustomer = $currentCustomer;
         $this->quoteIdMaskFactory = $quoteIdMaskFactory;
+        $this->quoteIdMaskResource = $quoteIdMaskResource;
     }
 
     /**
@@ -88,8 +96,8 @@ class CartPlugin
             if (!$maskedCartId) {
                 /** @var QuoteIdMask $quoteIdMask */
                 $quoteIdMask = $this->quoteIdMaskFactory->create();
-                $quoteIdMask->setQuoteId($cartId)
-                    ->save();
+                $quoteIdMask->setQuoteId($cartId);
+                $this->quoteIdMaskResource->save($quoteIdMask);
                 $maskedCartId = $quoteIdMask->getMaskedId() ?: '';
             }
         }
