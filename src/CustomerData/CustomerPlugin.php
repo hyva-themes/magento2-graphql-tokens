@@ -18,6 +18,7 @@ use Magento\Integration\Helper\Oauth\Data as OauthHelper;
 use Magento\Integration\Model\Oauth\Token;
 use Magento\Integration\Model\Oauth\Token as TokenModel;
 use Magento\Integration\Model\Oauth\TokenFactory as TokenModelFactory;
+use Magento\Integration\Model\ResourceModel\Oauth\Token as TokenResource;
 
 class CustomerPlugin
 {
@@ -47,18 +48,25 @@ class CustomerPlugin
      */
     private $date;
 
+    /**
+     * @var TokenResource
+     */
+    private $tokenResource;
+
     public function __construct(
         CurrentCustomer $currentCustomer,
         TokenModelFactory $tokenModelFactory,
         DateTime $dateTime,
         Date $date,
-        OauthHelper $oauthHelper
+        OauthHelper $oauthHelper,
+        TokenResource $tokenResource
     ) {
         $this->currentCustomer = $currentCustomer;
         $this->tokenModelFactory = $tokenModelFactory;
         $this->oauthHelper = $oauthHelper;
         $this->dateTime = $dateTime;
         $this->date = $date;
+        $this->tokenResource = $tokenResource;
     }
 
     /**
@@ -110,7 +118,7 @@ class CustomerPlugin
             // if there exist an entry in oauth_token table for the customer, then
             // remove it before attempting createCustomerToken
             if ($token->getId()) {
-                $token->delete();
+                $this->tokenResource->delete($token);
                 $tokenModel = $this->tokenModelFactory->create();
             }
 
